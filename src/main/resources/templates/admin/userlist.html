@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Все пользователи</title>
+</head>
+<body>
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Имя</th>
+            <th>Возраст</th>
+            <th>E-mail</th>
+            <th>Password</th>
+            <th>Роль</th>
+        </tr>
+    </thead>
+    <tr th:each="user, users : ${users}">
+        <td align="center" th:text="${user.id}"></td>
+        <td align="center" th:text="${user.name}"></td>
+        <td align="center" th:text="${user.age}"></td>
+        <td align="center" th:text="${user.email}"></td>
+        <td align="center" th:text="${user.password}"></td>
+        <td align="center" th:text="${user.roles}"></td>
+        <td align="center">
+            <form th:action="@{/admin/{id}/edit(id=${user.id})}">
+                <input type="submit" value="Edit"/>
+            </form>
+        </td>
+        <td align="center">
+            <form th:action="@{/admin/delete-user/{id}(id=${user.id})}">
+                <input type="submit" value="Delete"/>
+            </form>
+        </td>
+
+    </tr>
+</table>
+<hr>
+<br>
+<input type="button" value="Создать нового пользователя"
+       onclick="window.location.href = '/admin/new'">
+<br>
+<input type="button" value="На свою страницу"
+       onclick="window.location.href = 'user'">
+<br>
+<input type="button" value="Выход"
+       onclick="window.location.href = '/logout'">
+</body>
+</html>
