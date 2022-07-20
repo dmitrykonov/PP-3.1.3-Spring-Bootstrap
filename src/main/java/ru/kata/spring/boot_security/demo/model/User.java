@@ -19,18 +19,18 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column(name = "name")
-    @NotEmpty(message = "Имя не должно быть пустым")
+//    @NotEmpty(message = "Имя не должно быть пустым")
     private String name;
     @Column(name = "age")
-    @Min(value = 0, message = "Возраст не может быть меньше ноля")
+//    @Min(value = 0, message = "Возраст не может быть меньше ноля")
     private int age;
 
     @Column(name = "email")
-    @NotEmpty(message = "Адрес не должен быть пустым")
+//    @NotEmpty(message = "Адрес не должен быть пустым")
     private String email;
 
     @Column(name = "password")
-    @NotEmpty(message = "Пароль не должен быть пустым")
+//    @NotEmpty(message = "Пароль не должен быть пустым")
     private String password;
 
     public User() {
@@ -62,5 +62,16 @@ public class User {
             roles = new ArrayList<>();
         }
         this.roles.add(role);
+    }
+
+    public StringBuilder getStringRoles() {
+        StringBuilder stringRoles = new StringBuilder();
+
+        for (Role i : roles) {
+            stringRoles.append(i.toString());
+            stringRoles.append(" ");
+
+        }
+        return stringRoles;
     }
 }

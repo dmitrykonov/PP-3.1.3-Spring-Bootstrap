@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel='stylesheet' href='/webjars/bootstrap/css/bootstrap.css'>
+    <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.js"></script>
+    <title>Admin panel</title>
+</head>
+<body>
+<div class="container-fluid">
+    <div th:replace="parts::header"></div>
+    <div class="row vh-100">
+        <div class="col-2 p-0 pt-3">
+            <div th:replace="parts::leftcol-admin"></div>
+        </div>
+        <div class="col bg-light p-3 pe-4">
+            <div class="text-start h1 mb-3">Admin panel</div>
+            <nav>
+                <div class="nav nav-tabs" id="tab" role="tablist">
+                    <button class="nav-link active" id="tab-section-1" data-bs-toggle="tab" data-bs-target="#section-1"
+                            type="button" role="tab" aria-controls="nav-section-1" aria-selected="true">Users table
+                    </button>
+                    <button class="nav-link" id="tab-section-2" data-bs-toggle="tab" data-bs-target="#section-2"
+                            type="button" role="tab" aria-controls="nav-section-2" aria-selected="false">New user
+                    </button>
+                </div>
+            </nav>
+            <div class="tab-content" id="nav-tabContent">
+
+                <div class="tab-pane fade show active" id="section-1" role="tabpanel"
+                     aria-labelledby="nav-section-1-tab">
+                    <div th:replace="admin/allusers::userlist"></div>
+                </div>
+                <div class="tab-pane" id="section-2" role="tabpanel" aria-labelledby="nav-section-2-tab">
+                    <div th:replace="admin/new::newuser"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Модальные окна-->
+<div class="modal fade" th:each="user : ${users}" th:id="${'edit' + {user.id}}" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit user</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <form th:action="@{/admin/{id}/edit(id=${user.id})}" th:method="PATCH">
+                <div class="modal-body">
+                    <div th:replace="admin/edit::edituser"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-info">Edit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" th:each="user : ${users}" th:id="${'delete' + {user.id}}" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit user</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <form th:action="@{/admin/delete-user/{id}(id=${user.id})}" th:method="DELETE">
+                <div class="modal-body">
+                    <div th:replace="admin/delete::deleteuser"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

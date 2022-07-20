@@ -1,30 +1,31 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<div class="row justify-content-center text-center" th:fragment="edituser">
+
+<div class="row justify-content-center text-center" th:fragment="deleteuser">
     <div class="col-5">
         <label for="id" class="form-label fw-bold m-0">ID</label>
-        <input class="form-control" type="number" th:value="*{user.id}" id="id" disabled readonly/>
+        <input class="form-control" type="number" th:value="*{user.id}" id="id" name="id" disabled readonly/>
         <br>
         <label for="name" class="form-label fw-bold m-0">Name</label>
-        <input class="form-control" type="text" th:value="*{user.name}" id="name" name="Name"/>
+        <input class="form-control" type="text" th:value="*{user.name}" id="name" name="Name" disabled readonly/>
         <br>
         <label for="age" class="form-label fw-bold m-0">Age</label>
-        <input class="form-control" type="number" th:value="*{user.age}" id="age" name="Age"/>
+        <input class="form-control" type="number" th:value="*{user.age}" id="age" name="Age" disabled readonly/>
         <br>
         <label for="age" class="form-label fw-bold m-0">Email</label>
-        <input class="form-control" type="email" th:value="*{user.email}" id="email" placeholder="e-mail" name="Email"/>
+        <input class="form-control" type="email" th:value="*{user.email}" id="email"
+               name="Email" disabled readonly/>
         <br>
         <label for="password" class="form-label fw-bold m-0">Password</label>
-        <input class="form-control" type="password" th:value="*{user.password}" id="password" placeholder="*****"
-               name="Password"/>
+        <input class="form-control" type="password" th:value="*{user.password}" id="password"
+               name="Password" disabled readonly/>
         <br>
         <label class="form-label fw-bold m-0" for="roles">Role</label>
         <select class="form-select" size="2" multiple aria-label="user role" id="roles"
-                th:value="*{user.roles}" name="Roles">
+                th:value="*{user.roles}" name="Roles" disabled readonly>
             <option th:each="role: ${listRoles}" th:value="${role.id}"
                     th:text="${#strings.substring(role.roleName, 5)}"/>
         </select>
     </div>
 </div>
-</form>
-</body>
 </html>
+

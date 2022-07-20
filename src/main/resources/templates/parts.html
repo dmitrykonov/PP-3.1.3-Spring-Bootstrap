@@ -1,0 +1,29 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<div th:fragment="header">
+    <div class="row">
+        <nav class="navbar navbar-dark bg-dark ps-4 pe-4">
+            <div>
+                <span class="navbar-brand me-1 h1" th:text="${userdetails.email}">Email</span>
+                <span class="navbar-brand me-1">with roles:</span>
+                <span class="navbar-brand me-1" th:text="${#strings.trim(userdetails.getStringRoles())}">ROLE</span>
+            </div>
+            <a class="navbar-text text-decoration-none" href="/logout">Logout</a>
+        </nav>
+    </div>
+</div>
+<div th:fragment="leftcol-user">
+    <div class="list-group">
+        <div sec:authorize="hasRole('ROLE_ADMIN')">
+            <a href="/admin" class="list-group-item list-group-item-action border-0">Admin</a>
+        </div>
+        <a href="/user" class="list-group-item list-group-item-action active border-0">User</a>
+    </div>
+</div>
+<div th:fragment="leftcol-admin">
+    <div class="list-group">
+        <a href="/admin" class="list-group-item list-group-item-action active border-0">Admin</a>
+        <a href="/user" class="list-group-item list-group-item-action border-0">User</a>
+    </div>
+</div>
+</html>

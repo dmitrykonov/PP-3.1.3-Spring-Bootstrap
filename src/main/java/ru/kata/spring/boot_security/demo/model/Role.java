@@ -39,11 +39,13 @@ public class Role implements GrantedAuthority {
 
     @Override
     public String toString() {
-        return this.roleName;
+        return this.roleName.substring(5);
     }
 
     @Override
     public String getAuthority() {
         return roleName;
     }
+
+
 }

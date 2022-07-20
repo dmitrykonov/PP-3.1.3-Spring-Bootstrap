@@ -1,39 +1,78 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Добавление пользователя</title>
-</head>
-<body>
-<form action="#" th:action="@{/admin}" th:object="${user}" th:method="post">
-    <label for="name">Введите имя: </label>
-    <input type="text" th:field="*{name}" id="name" placeholder="Имя"/>
-    <div style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name error</div>
-    <br>
-    <label for="age">Введите возраст: </label>
-    <input type="number" th:field="*{age}" id="age" placeholder="Возраст"/>
-    <div style="color:red" th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Age error</div>
-    <br>
-    <label for="age">Введите e-mail: </label>
-    <input type="email" th:field="*{email}" id="email" placeholder="e-mail"/>
-    <div style="color:red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Mail error</div>
-    <br>
-    <label for="age">Введите пароль: </label>
-    <input type="password" th:field="*{password}" id="password" placeholder="*****"/>
-    <div style="color:red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password error</div>
-    <br>
-    <label for="roles">Выберите роль: </label>
-    <th:block th:each="role: ${listRoles}">
-        <input type="checkbox" id="roles" th:field="*{roles}"
-               th:text="${role.roleName}" th:value="${role.id}"/>
-    </th:block>
-    <br>
-    <input type="submit" value="Добавить пользователя"/>
-    <hr>
-    <br>
-    <input type="button" value="Выход"
-           onclick="window.location.href = '/logout'">
-</form>
-</body>
-</html>
+<!--<!DOCTYPE html>-->
+<!--<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <link rel='stylesheet' href='/webjars/bootstrap/css/bootstrap.css'>-->
+<!--    <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.js"></script>-->
+<!--    <title>Add user</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--<div class="container-fluid">-->
+<!--    <div th:replace="parts::header"></div>-->
+<!--    <div class="row vh-100">-->
+<!--        <div class="col-2 p-0 pt-3">-->
+<!--            <div th:replace="parts::leftcol-admin"></div>-->
+<!--        </div>-->
+<!--        <div class="col bg-light p-3 pe-4">-->
+<!--            <div class="text-start h1 mb-3">Admin panel</div>-->
+<!--            <div class="btn-group ">-->
+<!--                  <span>-->
+<!--                <form th:action="@{/admin}">-->
+<!--                    <button type="submit"-->
+<!--                            class="btn btn-link rounded-0 rounded-top text-decoration-none">User table</button>-->
+<!--                </form>-->
+<!--            </span>-->
+<!--                <span>-->
+<!--                <form th:action="@{/admin/new}">-->
+<!--                    <button type="submit" class="btn border bg-white rounded-0 rounded-top">New user</button>-->
+<!--                </form>-->
+<!--            </span>-->
+<!--            </div>-->
+<div th:fragment="newuser">
+    <div style="background-color: #F2F2F2" class="fw-bold border p-3 pt-2 pb-2 fs-5 rounded-top">
+        Add new user
+    </div>
+    <div class="border p-3 bg-white rounded-bottom">
+        <div class="row">
+            <div class="col"></div>
+            <div class="col text-center">
+                <form action="#" th:action="@{/admin}" th:object="${user}" th:method="post">
+                    <label for="name" class="form-label fw-bold m-0">Name</label>
+                    <input class="form-control" type="text" th:field="*{name}" id="name" placeholder="Имя"/>
+<!--                    <div style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name error</div>-->
+                    <br>
+                    <label for="age" class="form-label fw-bold m-0">Age</label>
+                    <input class="form-control" type="number" th:field="*{age}" id="age" placeholder="Возраст"/>
+<!--                    <div style="color:red" th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Age error</div>-->
+                    <br>
+                    <label for="age" class="form-label fw-bold m-0">Email</label>
+                    <input class="form-control" type="email" th:field="*{email}" id="email" placeholder="e-mail"/>
+<!--                    <div style="color:red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Mail error</div>-->
+                    <br>
+                    <label for="age" class="form-label fw-bold m-0">Password</label>
+                    <input class="form-control" type="password" th:field="*{password}" id="password"
+                           placeholder="*****"/>
+<!--                    <div style="color:red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password-->
+<!--                        error-->
+<!--                    </div>-->
+                    <br>
+                    <label class="form-label fw-bold m-0" for="roles">Role</label>
+                    <select class="form-select h-25" size="2" multiple aria-label="user role" id="roles"
+                            th:field="*{roles}">
+                        <option th:each="role: ${listRoles}" th:value="${role.id}"
+                                th:text="${#strings.substring(role.roleName, 5)}"/>
+                    </select>
+                    <br>
+                    <button type="submit" class="btn btn-success">Add new user</button>
+                </form>
+            </div>
+            <div class="col"></div>
+        </div>
+    </div>
+</div>
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+<!--</body>-->
+<!--</html>-->
+

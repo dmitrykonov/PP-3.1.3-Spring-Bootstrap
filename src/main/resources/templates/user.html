@@ -1,34 +1,50 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Spring Security Example</title>
+    <link rel='stylesheet' href='/webjars/bootstrap/css/bootstrap.css'>
+    <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.js"></script>
+    <title>User page</title>
 </head>
 <body>
-<h1>User, welcome spring boot security page!</h1>
-<hr>
-<table>
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>Имя</th>
-        <th>Возраст</th>
-        <th>E-mail</th>
-        <th>Password</th>
-        <th>Роль</th>
-    </tr>
-    </thead>
-    <tr>
-        <td align="center" th:text="${userdetails.id}"></td>
-        <td align="center" th:text="${userdetails.name}"></td>
-        <td align="center" th:text="${userdetails.age}"></td>
-        <td align="center" th:text="${userdetails.email}"></td>
-        <td align="center" th:text="${userdetails.password}"></td>
-        <td align="center" th:text="${userdetails.roles}"></td>
-    </tr>
-</table>
-<br>
-<input type="button" value="Выход"
-       onclick="window.location.href = '/logout'">
+<div class="container-fluid">
+    <div th:replace="parts::header"></div>
+    <div class="row vh-100">
+        <div class="col-2 p-0 pt-3">
+            <div th:replace="parts::leftcol-user"></div>
+        </div>
+        <div class="col bg-light p-3 pe-4">
+            <div class="text-start h1 mb-3">User information-page</div>
+            <div style="background-color: #F2F2F2" class="fw-bold border p-3 pt-2 pb-2 fs-5 rounded-top">
+                About user
+            </div>
+            <div class="border p-3 bg-white">
+                <table class="table table-striped border-top">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>Email</th>
+                        <th>Password</th>
+                        <th>Role</th>
+                    </tr>
+                    </thead>
+                    <tbody class="table-group border-top">
+                    <tr>
+                        <td th:text="${userdetails.id}"></td>
+                        <td th:text="${userdetails.name}"></td>
+                        <td th:text="${userdetails.age}"></td>
+                        <td th:text="${userdetails.email}"></td>
+                        <td th:text="${userdetails.password}"></td>
+                        <td th:text="${#strings.trim(userdetails.getStringRoles())}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
